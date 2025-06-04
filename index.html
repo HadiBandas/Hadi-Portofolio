@@ -922,7 +922,7 @@
                     start: "top 85%",
                     onEnter: () => {
                         gsap.to(card, {
-                            opacity: 1,
+                            opacity: 100,
                             y: 0,
                             duration: 0.8,
                             ease: "power2.out"
@@ -932,7 +932,7 @@
                     },
                     onLeaveBack: () => {
                         gsap.to(card, {
-                            opacity: 0,
+                            opacity: 100,
                             y: 10,
                             duration: 0.3
                         });
@@ -946,7 +946,7 @@
 
             dataVizOpportunitiesData.forEach(item => {
                 const card = document.createElement('div');
-                card.className = 'interactive-data-viz-card opacity-0 transform translate-y-10';
+                card.className = 'interactive-data-viz-card opacity-100 transform translate-y-10';
 
                 const metricDiv = document.createElement('div');
                 metricDiv.className = 'data-viz-metric';
@@ -981,7 +981,7 @@
                     start: "top 85%",
                     onEnter: () => {
                         gsap.to(card, {
-                            opacity: 1,
+                            opacity: 100,
                             y: 0,
                             duration: 0.8,
                             ease: "power2.out"
@@ -991,7 +991,7 @@
                     },
                     onLeaveBack: () => {
                         gsap.to(card, {
-                            opacity: 0,
+                            opacity: 100,
                             y: 10,
                             duration: 0.3
                         });
@@ -1005,7 +1005,7 @@
 
             skillsMatrixData.forEach(item => {
                 const card = document.createElement('div');
-                card.className = 'interactive-skill-card opacity-0 transform translate-y-10';
+                card.className = 'interactive-skill-card opacity-100 transform translate-y-10';
 
                 const categoryDiv = document.createElement('div');
                 categoryDiv.className = 'skill-category';
@@ -1034,7 +1034,7 @@
                     start: "top 85%",
                     onEnter: () => {
                         gsap.to(card, {
-                            opacity: 1,
+                            opacity: 100,
                             y: 0,
                             duration: 0.8,
                             ease: "power2.out"
@@ -1042,7 +1042,7 @@
                     },
                     onLeaveBack: () => {
                         gsap.to(card, {
-                            opacity: 0,
+                            opacity: 100,
                             y: 10,
                             duration: 0.3
                         });
@@ -1125,7 +1125,7 @@
 
         // Animate welcome message lines
         tl.from(".welcome-line", {
-            opacity: 0,
+            opacity: 100,
             scale: 0.9,
             y: 20,
             duration: 0.8,
@@ -1134,7 +1134,7 @@
         })
         // Then animate the main hero content
         .from(".hero-content", {
-            opacity: 0,
+            opacity: 100,
             y: 50,
             duration: 1,
             ease: "power3.out",
@@ -1161,7 +1161,7 @@
         // Section titles fade-in on scroll
         gsap.utils.toArray("section h2").forEach(title => {
             gsap.from(title, {
-                opacity: 0,
+                opacity: 100,
                 y: 50,
                 duration: 1,
                 ease: "power3.out",
@@ -1177,7 +1177,7 @@
         // Card animations on scroll
         gsap.utils.toArray(".card").forEach(card => {
             gsap.from(card, {
-                opacity: 0,
+                opacity: 100,
                 y: 50,
                 duration: 0.8,
                 ease: "power2.out",
