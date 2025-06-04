@@ -1,0 +1,1196 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mahasin Hadiyatulloh - Personal Branding</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Inter Font from Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- GSAP and ScrollTrigger CDN - Moved to head for proper loading -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* Light Slate 50 */
+            color: #334155; /* Slate 700 */
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+        .section-padding {
+            padding: 4rem 1rem;
+        }
+        .card {
+            background-color: #ffffff;
+            border-radius: 0.75rem; /* rounded-xl */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* shadow-md */
+            padding: 2rem;
+        }
+        .btn-primary {
+            background-color: #3b82f6; /* Blue 500 */
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem; /* rounded-lg */
+            transition: background-color 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: #2563eb; /* Blue 600 */
+        }
+        .nav-link {
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            transition: background-color 0.3s ease;
+        }
+        .nav-link:hover {
+            background-color: #e2e8f0; /* Slate 200 */
+        }
+        .active-nav-link {
+            background-color: #e2e8f0; /* Slate 200 */
+            font-weight: 600;
+        }
+        /* New styles for visual achievement cards */
+        .visual-achievement-card {
+            background-color: #ffffff;
+            border-radius: 0.75rem; /* rounded-xl */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* shadow-md */
+            padding: 1.5rem;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        .visual-achievement-card:hover {
+            transform: translateY(-5px);
+        }
+        .visual-achievement-number {
+            font-size: 2.25rem; /* text-4xl */
+            font-weight: 700; /* font-bold */
+            color: #3b82f6; /* Blue 500 */
+            margin-bottom: 0.5rem;
+            display: block; /* Ensure it takes full width */
+        }
+        .visual-achievement-label {
+            font-size: 1rem; /* text-base */
+            color: #475569; /* Slate 600 */
+        }
+
+        /* Styles for interactive data visualization cards */
+        .interactive-data-viz-card {
+            background-color: #ffffff;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            padding: 1.5rem;
+            text-align: left;
+            transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 180px; /* Ensure consistent height */
+        }
+        .interactive-data-viz-card:hover {
+            transform: translateY(-5px);
+        }
+        .data-viz-metric {
+            font-size: 1.25rem; /* text-xl */
+            font-weight: 600; /* font-semibold */
+            color: #1e293b; /* Slate 900 */
+            margin-bottom: 0.5rem;
+        }
+        .data-viz-result {
+            font-size: 1.75rem; /* text-3xl */
+            font-weight: 700; /* font-bold */
+            color: #3b82f6; /* Blue 500 */
+            margin-bottom: 0.75rem;
+        }
+        .data-viz-type {
+            font-size: 0.875rem; /* text-sm */
+            color: #64748b; /* Slate 500 */
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .data-viz-interaction {
+            font-size: 0.875rem; /* text-sm */
+            color: #94a3b8; /* Slate 400 */
+            margin-top: 0.75rem;
+            font-style: italic;
+        }
+
+        /* Styles for interactive skills cards */
+        .interactive-skill-card {
+            background-color: #ffffff;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            padding: 1.5rem;
+            text-align: left;
+            transition: transform 0.3s ease;
+            min-height: 200px; /* Ensure consistent height */
+        }
+        .interactive-skill-card:hover {
+            transform: translateY(-5px);
+        }
+        .skill-category {
+            font-size: 0.875rem; /* text-sm */
+            font-weight: 500; /* font-medium */
+            color: #64748b; /* Slate 500 */
+            margin-bottom: 0.5rem;
+        }
+        .skill-title {
+            font-size: 1.25rem; /* text-xl */
+            font-weight: 600; /* font-semibold */
+            color: #1e293b; /* Slate 900 */
+            margin-bottom: 1rem;
+        }
+        .skill-projects, .skill-application {
+            font-size: 0.9rem; /* text-sm */
+            color: #475569; /* Slate 600 */
+            margin-bottom: 0.5rem;
+        }
+        .skill-icon {
+            font-size: 1.5rem;
+            color: #3b82f6;
+            margin-right: 0.5rem;
+        }
+        /* Custom animation for subtle pulse effect */
+        @keyframes pulse-subtle {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 0.2;
+            }
+            50% {
+                transform: scale(1.02);
+                opacity: 0.3;
+            }
+        }
+        .animate-pulse-subtle {
+            animation: pulse-subtle 4s infinite ease-in-out;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Header & Navigation -->
+    <header class="bg-white shadow-sm py-4">
+        <div class="container flex justify-between items-center">
+            <h1 class="text-2xl font-bold text-blue-600">Mahasin Hadiyatulloh</h1>
+            <nav class="hidden md:flex space-x-4">
+                <a href="#home" class="nav-link" data-lang-key="navHome">Beranda</a>
+                <a href="#about" class="nav-link" data-lang-key="navAbout">Tentang Saya</a>
+                <a href="#portfolio" class="nav-link" data-lang-key="navPortfolio">Portofolio</a>
+                <a href="#skills" class="nav-link" data-lang-key="navSkills">Keterampilan</a>
+                <a href="#design-philosophy" class="nav-link" data-lang-key="navDesignPhilosophy">Filosofi Desain</a>
+                <a href="#contact" class="nav-link" data-lang-key="navContact">Kontak</a>
+            </nav>
+            <div class="flex items-center space-x-4">
+                <button id="lang-toggle" class="btn-primary text-sm px-3 py-2">EN / ID</button>
+                <button id="mobile-menu-button" class="md:hidden text-slate-700 focus:outline-none">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu Overlay -->
+        <div id="mobile-menu-overlay" class="fixed inset-0 bg-white z-50 hidden md:hidden">
+            <div class="flex justify-end p-4">
+                <button id="close-mobile-menu" class="text-slate-700 focus:outline-none">
+                    <i class="fas fa-times text-2xl"></i>
+                </button>
+            </div>
+            <nav class="flex flex-col items-center space-y-6 text-xl">
+                <a href="#home" class="nav-link" data-lang-key="navHome">Beranda</a>
+                <a href="#about" class="nav-link" data-lang-key="navAbout">Tentang Saya</a>
+                <a href="#portfolio" class="nav-link" data-lang-key="navPortfolio">Portofolio</a>
+                <a href="#skills" class="nav-link" data-lang-key="navSkills">Keterampilan</a>
+                <a href="#design-philosophy" class="nav-link" data-lang-key="navDesignPhilosophy">Filosofi Desain</a>
+                <a href="#contact" class="nav-link" data-lang-key="navContact">Kontak</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Home Section -->
+        <section id="home" class="section-padding bg-gradient-to-r from-blue-50 to-indigo-50 text-center">
+            <div class="container">
+                <!-- NEW WELCOME MESSAGE CONTAINER -->
+                <div id="welcome-message-container" class="relative overflow-hidden mb-12 py-16 px-4 md:px-8 bg-white bg-opacity-70 rounded-xl shadow-lg cursor-pointer">
+                    <div class="absolute inset-0 bg-blue-100 opacity-20 rounded-xl animate-pulse-subtle"></div>
+                    <div class="relative z-10">
+                        <p class="welcome-line text-4xl md:text-5xl font-extrabold text-blue-800 mb-4 opacity-100 scale-90" data-lang-key="welcomeLine1">Selamat Datang.</p>
+                        <p class="welcome-line text-2xl md:text-3xl font-semibold text-slate-700 mb-2 opacity-100 scale-90" data-lang-key="welcomeLine2">Di sini, data bertemu strategi, dan visi menjadi hasil.</p>
+                        <p class="welcome-line text-lg md:text-xl text-slate-600 opacity-100 scale-90" data-lang-key="welcomeLine3">Jelajahi bagaimana saya mengubah tantangan digital menjadi pertumbuhan terukur.</p>
+                    </div>
+                </div>
+                <!-- END NEW WELCOME MESSAGE CONTAINER -->
+
+                <div class="hero-content opacity-100 transform translate-y-10">
+                    <h2 class="text-5xl font-extrabold text-blue-800 mb-4 leading-tight" data-lang-key="homeHeroTitle">Mengarsiteki Pertumbuhan Digital & Keunggulan Operasional</h2>
+                    <p class="text-xl text-slate-600 mb-8" data-lang-key="homeHeroSubtitle">Strategis Pemasaran Digital Kinerja | Inovator Manajemen Proyek</p>
+                    <!-- Removed the duplicate stat cards as they are now part of the "Key Project Achievements Summary" -->
+                    <p class="text-lg text-slate-700 mb-8 max-w-3xl mx-auto" data-lang-key="homeIntro">
+                        Saya adalah seorang Strategis Pemasaran Digital Berorientasi Hasil & Inovator Manajemen Proyek yang unggul dalam mengubah data kompleks menjadi strategi berdampak tinggi dan sistem operasional yang efisien. Keahlian ganda ini dalam mendorong pendapatan melalui pemasaran kinerja dan mengoptimalkan proses internal melalui manajemen proyek merupakan proposisi nilai yang unik.
+                    </p>
+                    <a href="#portfolio" class="btn-primary inline-block" data-lang-key="homeCta">Lihat Portofolio Saya</a>
+                </div>
+
+                <div class="mt-16 text-center">
+                    <h3 class="text-3xl font-bold text-slate-800 mb-8" data-lang-key="homeAchievementsTitle">Ringkasan Pencapaian Proyek Utama</h3>
+                    <div id="visual-achievements-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <!-- Achievement cards will be dynamically populated here by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="section-padding bg-white">
+            <div class="container">
+                <h2 class="text-4xl font-bold text-slate-800 mb-8 text-center" data-lang-key="aboutTitle">Tentang Saya</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                    <div class="space-y-6">
+                        <p class="text-lg text-slate-700" data-lang-key="aboutNarrative1">
+                            Mahasin Hadiyatulloh adalah seorang Strategis Pemasaran Digital Berorientasi Hasil & Inovator Manajemen Proyek yang unggul dalam mengubah data kompleks menjadi strategi berdampak tinggi dan sistem operasional yang efisien. Keahlian ganda ini dalam mendorong pendapatan melalui pemasaran kinerja dan mengoptimalkan proses internal melalui manajemen proyek merupakan proposisi nilai yang unik.
+                        </p>
+                        <p class="text-lg text-slate-700" data-lang-key="aboutNarrative2">
+                            Keahlian saya melampaui sekadar menjalankan kampanye; saya adalah seorang arsitek pertumbuhan. Saya tidak hanya mengelola proyek; saya membangun sistem yang mendorong efisiensi dan akuntabilitas. Latar belakang kreatif saya sebagai "Content Creator & Videographer" dan "VFX Artist" menambahkan dimensi yang berbeda, memungkinkan pemahaman spektrum penuh inisiatif digital mulai dari strategi hingga eksekusi dan daya tarik visual. Pemahaman holistik ini menempatkan saya sebagai penyedia solusi yang komprehensif.
+                        </p>
+                        <p class="text-lg text-slate-700" data-lang-key="aboutNarrative3">
+                            Keberagaman peran yang pernah saya emban menunjukkan seperangkat keterampilan yang luas dan bervariasi. Dalam lanskap digital kontemporer, inisiatif pemasaran dan operasional yang sukses semakin menuntut pemahaman lintas fungsi. Ini menempatkan saya tidak hanya sebagai pelaksana tugas tetapi sebagai arsitek strategis yang mampu menjembatani kesenjangan antara berbagai departemen dan disiplin ilmu, yang pada akhirnya mengarah pada hasil bisnis yang lebih kohesif, efisien, dan sukses.
+                        </p>
+                    </div>
+                    <div>
+                        <img src="F:\Hadi\Hadi\Portofolio\2025\Web Porto\Hadi - Profile nw1.jpg" alt="Mahasin Hadiyatulloh Profile" class="rounded-xl shadow-lg w-full">
+                    </div>
+                </div>
+
+                <div class="mt-16 grid grid-cols-1 md:grid-cols-2 gap-12">
+                    <div class="card">
+                        <h3 class="text-2xl font-bold text-slate-800 mb-4" data-lang-key="aboutSkillsTitle">Keterampilan & Keahlian</h3>
+                        <ul class="list-disc list-inside text-slate-700 space-y-2">
+                            <li data-lang-key="skillPerfMarketing">Pemasaran Kinerja: Google Ads, Meta Ads, Riset Kata Kunci & Manajemen Penawaran, Iklan Berbayar.</li>
+                            <li data-lang-key="skillDataDecision">Pengambilan Keputusan Berbasis Data: Google Analytics, Google Tag Manager, Google Data Studio, Optimasi Berbasis Data.</li>
+                            <li data-lang-key="skillCRO">Optimasi Tingkat Konversi (CRO): Pengujian A/B, Optimasi Materi Iklan.</li>
+                            <li data-lang-key="skillProjectMgmt">Manajemen Proyek: Pengembangan Sistem Notion, Kerangka KPI & Dasbor.</li>
+                            <li data-lang-key="skillContentVideo">Produksi & Pengeditan Video, Pengeditan Efek Virtual.</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3 class="text-2xl font-bold text-slate-800 mb-4" data-lang-key="aboutCertAwardsTitle">Sertifikasi & Penghargaan</h3>
+                        <ul class="list-disc list-inside text-slate-700 space-y-2">
+                            <li data-lang-key="cert1">Google Ads Certification</li>
+                            <li data-lang-key="cert2">Microsoft Advertising Certification</li>
+                            <li data-lang-key="cert3">Google Data Analytics Certification</li>
+                            <li data-lang-key="award1">Employee of The Year Award 2023</li>
+                            <li data-lang-key="award2">Juara 1 Kompetisi Band Antar-Sekolah (Vokalis)</li>
+                        </ul>
+                        <h3 class="text-2xl font-bold text-slate-800 mt-6 mb-4" data-lang-key="aboutLeadershipTitle">Sukarela & Kepemimpinan</h3>
+                        <p class="text-lg text-slate-700" data-lang-key="aboutLeadershipDesc">
+                            Mentor di Digital Entrepreneurship Academy, membimbing UKM mengatasi tantangan pemasaran digital.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Portfolio Section -->
+        <section id="portfolio" class="section-padding bg-gradient-to-r from-gray-50 to-slate-100">
+            <div class="container">
+                <h2 class="text-4xl font-bold text-slate-800 mb-12 text-center" data-lang-key="portfolioTitle">Portofolio Saya</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Project Card 1: PT Mooi Sentra Wisata -->
+                    <div class="card flex flex-col">
+                        <img src="https://placehold.co/400x250/e0f2fe/1e40af?text=PT+Mooi+Sentra+Wisata" alt="PT Mooi Sentra Wisata Project" class="rounded-lg mb-4 w-full h-48 object-cover">
+                        <h3 class="text-xl font-semibold text-blue-700 mb-2" data-lang-key="project1Title">Kampanye Pemasaran Kinerja - PT Mooi Sentra Wisata</h3>
+                        <p class="text-slate-600 text-sm mb-4 flex-grow" data-lang-key="project1Desc">
+                            Meningkatkan ROAS, lalu lintas situs web, dan tingkat konversi melalui kampanye Google Ads yang dioptimalkan.
+                        </p>
+                        <a href="https://www.canva.com/design/DAGThtQSNJs/Ek36E1Z9ow9GucmWOmFSGA/view?utm_content=DAGThtQSNJs&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h28b90eadbb" target="_blank" class="btn-primary text-center self-start" data-lang-key="projectCta">Lihat Studi Kasus</a>
+                    </div>
+                    <!-- Project Card 2: Integrated Marketing Operations System in Notion -->
+                    <div class="card flex flex-col">
+                        <img src="https://placehold.co/400x250/e0f2fe/1e40af?text=Notion+System" alt="Notion System Project" class="rounded-lg mb-4 w-full h-48 object-cover">
+                        <h3 class="text-xl font-semibold text-blue-700 mb-2" data-lang-key="project2Title">Sistem Manajemen Proyek - Notion</h3>
+                        <p class="text-slate-600 text-sm mb-4 flex-grow" data-lang-key="project2Desc">
+                            Mengembangkan sistem manajemen tim pemasaran terintegrasi di Notion untuk meningkatkan efisiensi dan kolaborasi.
+                        </p>
+                        <a href="https://www.canva.com/design/DAGThtQSNJs/Ek36E1Z9ow9GucmWOmFSGA/view?utm_content=DAGThtQSNJs&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h28b90eadbb" target="_blank" class="btn-primary text-center self-start" data-lang-key="projectCta">Lihat Studi Kasus</a>
+                    </div>
+                    <!-- Project Card 3: Heritage Lifestyle Hub -->
+                    <div class="card flex flex-col">
+                        <img src="https://placehold.co/400x250/e0f2fe/1e40af?text=Heritage+Hub" alt="Heritage Lifestyle Hub Project" class="rounded-lg mb-4 w-full h-48 object-cover">
+                        <h3 class="text-xl font-semibold text-blue-700 mb-2" data-lang-key="project3Title">Pembuatan Konten & Videografi - Heritage Lifestyle Hub</h3>
+                        <p class="text-slate-600 text-sm mb-4 flex-grow" data-lang-key="project3Desc">
+                            Meningkatkan kesadaran merek dan keterlibatan Instagram melalui konten video yang sinematik.
+                        </p>
+                        <a href="https://www.canva.com/design/DAGThtQSNJs/Ek36E1Z9ow9GucmWOmFSGA/view?utm_content=DAGThtQSNJs&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h28b90eadbb" target="_blank" class="btn-primary text-center self-start" data-lang-key="projectCta">Lihat Studi Kasus</a>
+                    </div>
+                    <!-- Project Card 4: PT Jodamo Exchange - E-commerce Marketing -->
+                    <div class="card flex flex-col">
+                        <img src="https://placehold.co/400x250/e0f2fe/1e40af?text=Jodamo+E-commerce" alt="PT Jodamo Exchange E-commerce Project" class="rounded-lg mb-4 w-full h-48 object-cover">
+                        <h3 class="text-xl font-semibold text-blue-700 mb-2" data-lang-key="project4Title">Pemasaran E-commerce - PT Jodamo Exchange</h3>
+                        <p class="text-slate-600 text-sm mb-4 flex-grow" data-lang-key="project4Desc">
+                            Mendorong lalu lintas organik dan visibilitas produk untuk platform e-commerce.
+                        </p>
+                        <a href="https://www.canva.com/design/DAGThtQSNJs/Ek36E1Z9ow9GucmWOmFSGA/view?utm_content=DAGThtQSNJs&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h28b90eadbb" target="_blank" class="btn-primary text-center self-start" data-lang-key="projectCta">Lihat Studi Kasus</a>
+                    </div>
+                    <!-- Project Card 5: Wheels Bintaro Partnership -->
+                    <div class="card flex flex-col">
+                        <img src="https://placehold.co/400x250/e0f2fe/1e40af?text=Wheels+Bintaro" alt="Wheels Bintaro Project" class="rounded-lg mb-4 w-full h-48 object-cover">
+                        <h3 class="text-xl font-semibold text-blue-700 mb-2" data-lang-key="project5Title">Kepemimpinan Pemasaran - Wheels Bintaro Partnership</h3>
+                        <p class="text-slate-600 text-sm mb-4 flex-grow" data-lang-key="project5Desc">
+                            Meningkatkan tingkat penukaran voucher dan pertumbuhan pendapatan melebihi target.
+                        </p>
+                        <a href="https://www.canva.com/design/DAGThtQSNJs/Ek36E1Z9ow9GucmWOmFSGA/view?utm_content=DAGThtQSNJs&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h28b90eadbb" target="_blank" class="btn-primary text-center self-start" data-lang-key="projectCta">Lihat Studi Kasus</a>
+                    </div>
+                    <!-- Project Card 6: Data Visualization Placeholder -->
+                    <div class="card flex flex-col">
+                        <img src="https://placehold.co/400x250/e0f2fe/1e40af?text=Data+Visualization" alt="Data Visualization Project" class="rounded-lg mb-4 w-full h-48 object-cover">
+                        <h3 class="text-xl font-semibold text-blue-700 mb-2" data-lang-key="project6Title">Visualisasi Data Interaktif</h3>
+                        <p class="text-slate-600 text-sm mb-4 flex-grow" data-lang-key="project6Desc">
+                            Demonstrasi kemampuan analitis melalui dasbor interaktif dan visualisasi data dinamis.
+                        </p>
+                        <a href="https://www.canva.com/design/DAGThtQSNJs/Ek36E1Z9ow9GucmWOmFSGA/view?utm_content=DAGThtQSNJs&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h28b90eadbb" target="_blank" class="btn-primary text-center self-start" data-lang-key="projectCta">Lihat Contoh</a>
+                    </div>
+                </div>
+                <div class="mt-16 text-center">
+                    <h3 class="text-3xl font-bold text-slate-800 mb-8" data-lang-key="dataVizOpportunitiesTitle">Peluang Visualisasi Data Interaktif</h3>
+                    <div id="interactive-data-viz-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <!-- Interactive data viz cards will be populated here by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="section-padding bg-white">
+            <div class="container">
+                <h2 class="text-4xl font-bold text-slate-800 mb-12 text-center" data-lang-key="skillsTitle">Keterampilan & Penerapan Proyek</h2>
+                <div id="interactive-skills-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Interactive skills cards will be populated here by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Design Philosophy Section (NEW) -->
+        <section id="design-philosophy" class="section-padding bg-gradient-to-r from-blue-50 to-indigo-50">
+            <div class="container text-center">
+                <h2 class="text-4xl font-bold text-slate-800 mb-8" data-lang-key="designPhilosophyTitle">Filosofi Desain & Pengalaman Pengguna</h2>
+                <p class="text-lg text-slate-700 mb-8 max-w-3xl mx-auto" data-lang-key="designPhilosophyIntro">
+                    Di balik setiap antarmuka yang menarik, terdapat filosofi desain yang berpusat pada pengguna. Saya percaya bahwa interaksi digital harus intuitif, efisien, dan menyenangkan.
+                </p>
+                <div class="card max-w-4xl mx-auto text-left">
+                    <p class="text-lg text-slate-700 mb-4" data-lang-key="designPhilosophyPara1">
+                        Saat Anda mengeklik menu atau tautan, animasi navigasi dapat mengubah tindakan sederhana menjadi pengalaman yang mulus. Mereka seperti GPS situs Anda, memandu pengguna dari satu tempat ke tempat lain. Ini bisa berupa menu yang terbuka dengan elegan atau transisi antar halaman yang semulus membalik buku. Interaksi ini membantu pengguna memahami di mana mereka berada di situs Anda dan bagaimana menuju ke tempat yang mereka inginkan.
+                    </p>
+                    <p class="text-lg text-slate-700 mb-4" data-lang-key="designPhilosophyPara2">
+                        Animasi ini mengurangi kebingungan dan menciptakan alur yang terasa alami dan intuitif. Ini adalah bagian dari komitmen saya untuk menciptakan pengalaman digital yang tidak hanya fungsional tetapi juga berkesan.
+                    </p>
+                    <p class="text-base text-slate-500 italic" data-lang-key="designPhilosophyExample">
+                        Contoh: Animasi navigasi di situs web voting Awwwards oleh Tubik.
+                    </p>
+                </div>
+            </div>
+        </section>
+        <!-- END Design Philosophy Section -->
+
+        <!-- Contact Section -->
+        <section id="contact" class="section-padding bg-white">
+            <div class="container text-center">
+                <h2 class="text-4xl font-bold text-slate-800 mb-8" data-lang-key="contactTitle">Mari Terhubung!</h2>
+                <p class="text-lg text-slate-700 mb-12 max-w-2xl mx-auto" data-lang-key="contactIntro">
+                    Siap untuk meningkatkan strategi pemasaran digital atau menyederhanakan operasi Anda? Mari kita diskusikan bagaimana keahlian saya dapat memberikan dampak nyata bagi bisnis Anda.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="card">
+                        <h3 class="text-2xl font-bold text-slate-800 mb-4" data-lang-key="contactInfoTitle">Informasi Kontak</h3>
+                        <p class="text-lg text-slate-700 mb-2"><i class="fas fa-envelope mr-2 text-blue-600"></i>mahasinhadiyatulloh@gmail.com</p>
+                        <p class="text-lg text-slate-700 mb-4"><i class="fas fa-phone mr-2 text-blue-600"></i>+6281220683254</p>
+                        <div class="flex justify-center space-x-6 text-2xl">
+                            <a href="https://linkedin.com/in/mahasinhadiyatulloh" target="_blank" class="text-blue-600 hover:text-blue-800 transition-colors"><i class="fab fa-linkedin"></i></a>
+                            <a href="https://mahasinhadiyatulloh.journoportfolio.com/#/" target="_blank" class="text-blue-600 hover:text-blue-800 transition-colors"><i class="fas fa-globe"></i></a>
+                            <!-- Add other social media links as needed -->
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h3 class="text-2xl font-bold text-slate-800 mb-4" data-lang-key="contactFormTitle">Kirim Pesan</h3>
+                        <form class="space-y-4">
+                            <div>
+                                <input type="text" id="name" placeholder="Nama Anda" class="w-full p-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" data-lang-key="formNamePlaceholder">
+                            </div>
+                            <div>
+                                <input type="email" id="email" placeholder="Email Anda" class="w-full p-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" data-lang-key="formEmailPlaceholder">
+                            </div>
+                            <div>
+                                <textarea id="message" rows="5" placeholder="Pesan Anda" class="w-full p-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" data-lang-key="formMessagePlaceholder"></textarea>
+                            </div>
+                            <button type="submit" class="btn-primary w-full" data-lang-key="formSubmitBtn">Kirim Pesan</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-800 text-white py-8 text-center">
+        <div class="container">
+            <p>&copy; 2024 Mahasin Hadiyatulloh. All rights reserved.</p>
+            <p class="text-sm mt-2" data-lang-key="footerCredit">Dibuat dengan semangat dan data.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Language content object
+        const langContent = {
+            id: {
+                // Navigation
+                navHome: "Beranda",
+                navAbout: "Tentang Saya",
+                navPortfolio: "Portofolio",
+                navSkills: "Keterampilan",
+                navDesignPhilosophy: "Filosofi Desain", // NEW
+                navContact: "Kontak",
+
+                // Home Section
+                welcomeLine1: "Selamat Datang.",
+                welcomeLine2: "Di sini, data bertemu strategi, dan visi menjadi hasil.",
+                welcomeLine3: "Jelajahi bagaimana saya mengubah tantangan digital menjadi pertumbuhan terukur.",
+                homeHeroTitle: "Mengarsiteki Pertumbuhan Digital & Keunggulan Operasional",
+                homeHeroSubtitle: "Strategis Pemasaran Digital Kinerja | Inovator Manajemen Proyek",
+                homeStat1ValueDisplay: "40850%", // Display value for animation - UPDATED
+                homeStat1Label: "Peningkatan ROAS",
+                homeStat2ValueDisplay: "496%",
+                homeStat2Label: "Pertumbuhan Lalu Lintas Situs Web",
+                homeStat3ValueDisplay: "30%",
+                homeStat3Label: "Peningkatan Produktivitas",
+                homeIntro: "Saya adalah seorang Strategis Pemasaran Digital Berorientasi Hasil & Inovator Manajemen Proyek yang unggul dalam mengubah data kompleks menjadi strategi berdampak tinggi dan sistem operasional yang efisien. Keahlian ganda ini dalam mendorong pendapatan melalui pemasaran kinerja dan mengoptimalkan proses internal melalui manajemen proyek merupakan proposisi nilai yang unik.",
+                homeCta: "Lihat Portofolio Saya",
+                homeAchievementsTitle: "Ringkasan Pencapaian Proyek Utama",
+                homeAchievementROAS: "Peningkatan ROAS",
+                homeAchievementTraffic: "Pertumbuhan Lalu Lintas Situs Web",
+                homeAchievementProductivity: "Peningkatan Produktivitas",
+                homeAchievementCostSaving: "Penghematan Biaya",
+                homeAchievementEngagement: "Social Media Engagment",
+                homeAchievementConversionRate: "Peningkatan Tingkat Konversi",
+
+
+                // About Section
+                aboutTitle: "Tentang Saya",
+                aboutNarrative1: "Mahasin Hadiyatulloh adalah seorang Strategis Pemasaran Digital Berorientasi Hasil & Inovator Manajemen Proyek yang unggul dalam mengubah data kompleks menjadi strategi berdampak tinggi dan sistem operasional yang efisien. Keahlian ganda ini dalam mendorong pendapatan melalui pemasaran kinerja dan mengoptimalkan proses internal melalui manajemen proyek merupakan proposisi nilai yang unik.",
+                aboutNarrative2: "Keahlian saya melampaui sekadar menjalankan kampanye; saya adalah seorang arsitek pertumbuhan. Saya tidak hanya mengelola proyek; saya membangun sistem yang mendorong efisiensi dan akuntabilitas. Latar belakang kreatif saya sebagai 'Content Creator & Videographer' dan 'VFX Artist' menambahkan dimensi yang berbeda, memungkinkan pemahaman spektrum penuh inisiatif digital mulai dari strategi hingga eksekusi dan daya tarik visual. Pemahaman holistik ini menempatkan saya sebagai penyedia solusi yang komprehensif.",
+                aboutNarrative3: "Keberagaman peran yang pernah saya emban menunjukkan seperangkat keterampilan yang luas dan bervariasi. Dalam lanskap digital kontemporer, inisiatif pemasaran dan operasional yang sukses semakin menuntut pemahaman lintas fungsi. Ini menempatkan saya tidak hanya sebagai pelaksana tugas tetapi sebagai arsitek strategis yang mampu menjembatani kesenjangan antara berbagai departemen dan disiplin ilmu, yang pada akhirnya mengarah pada hasil bisnis yang lebih kohesif, efisien, dan sukses.",
+                aboutSkillsTitle: "Keterampilan & Keahlian",
+                skillPerfMarketing: "Pemasaran Kinerja: Google Ads, Meta Ads, Riset Kata Kunci & Manajemen Penawaran, Iklan Berbayar.",
+                skillDataDecision: "Pengambilan Keputusan Berbasis Data: Google Analytics, Google Tag Manager, Google Data Studio, Optimasi Berbasis Data.",
+                skillCRO: "Optimasi Tingkat Konversi (CRO): Pengujian A/B, Optimasi Materi Iklan.",
+                skillProjectMgmt: "Manajemen Proyek: Pengembangan Sistem Notion, Kerangka KPI & Dasbor.",
+                skillContentVideo: "Produksi & Pengeditan Video, Pengeditan Efek Virtual.",
+                aboutCertAwardsTitle: "Sertifikasi & Penghargaan",
+                cert1: "Google Ads Certification",
+                cert2: "Microsoft Advertising Certification",
+                cert3: "Google Data Analytics Certification",
+                award1: "Employee of The Year Award 2023",
+                award2: "Juara 1 Kompetisi Band Antar-Sekolah (Vokalis)",
+                aboutLeadershipTitle: "Sukarela & Kepemimpinan",
+                aboutLeadershipDesc: "Mentor di Digital Entrepreneurship Academy, membimbing UKM mengatasi tantangan pemasaran digital.",
+
+                // Portfolio Section
+                portfolioTitle: "Portofolio Saya",
+                project1Title: "Kampanye Pemasaran Kinerja - PT Mooi Sentra Wisata",
+                project1Desc: "Meningkatkan ROAS, lalu lintas situs web, dan tingkat konversi melalui kampanye Google Ads yang dioptimalkan.",
+                project2Title: "Sistem Manajemen Proyek - Notion",
+                project2Desc: "Mengembangkan sistem manajemen tim pemasaran terintegrasi di Notion untuk meningkatkan efisiensi dan kolaborasi.",
+                project3Title: "Pembuatan Konten & Videografi - Heritage Lifestyle Hub",
+                project3Desc: "Meningkatkan kesadaran merek dan keterlibatan Instagram melalui konten video yang sinematik.",
+                project4Title: "Pemasaran E-commerce - PT Jodamo Exchange",
+                project4Desc: "Mendorong lalu lintas organik dan visibilitas produk untuk platform e-commerce.",
+                project5Title: "Kepemimpinan Pemasaran - Wheels Bintaro Partnership",
+                project5Desc: "Meningkatkan tingkat penukaran voucher dan pertumbuhan pendapatan melebihi target.",
+                project6Title: "Visualisasi Data Interaktif",
+                project6Desc: "Demonstrasi kemampuan analitis melalui dasbor interaktif dan visualisasi data dinamis.",
+                projectCta: "Lihat Studi Kasus",
+                dataVizOpportunitiesTitle: "Peluang Visualisasi Data Interaktif",
+                dataVizMetricROAS: "ROAS",
+                dataVizMetricTraffic: "Lalu Lintas Situs Web",
+                dataVizMetricCTR: "CTR",
+                dataVizMetricCPA: "CPA",
+                dataVizMetricProductivity: "Produktivitas",
+                dataVizMetricCostSaving: "Penghematan Biaya",
+                dataVizMetricSocialEngagement: "Keterlibatan Sosial",
+                dataVizMetricConversionRate: "Tingkat Konversi",
+                dataVizMetricOrganicTraffic: "Lalu Lintas Organik",
+                dataVizMetricProductVisibility: "Visibilitas Produk",
+                dataVizMetricInStoreSales: "Penjualan di Toko",
+                dataVizMetricVoucherRedemption: "Tingkat Penukaran Voucher",
+                dataVizTypeLineArea: "Grafik Garis/Area",
+                dataVizTypeLine: "Grafik Garis",
+                dataVizTypeBarLine: "Grafik Batang/Garis",
+                dataVizTypeGaugeProgress: "Pengukur/Bilah Kemajuan",
+                dataVizTypeBarDonut: "Grafik Batang/Donat",
+                dataVizInteractionHoverMonthly: "Hover untuk melihat rincian bulanan, filter berdasarkan jenis kampanye",
+                dataVizInteractionToggleOrganicPaid: "Toggle antara lalu lintas organik vs. berbayar",
+                dataVizInteractionFilterAudienceTime: "Filter berdasarkan segmen audiens atau periode waktu",
+                dataVizInteractionCompareBeforeAfter: "Bandingkan CPA sebelum dan sesudah optimasi",
+                dataVizInteractionClickSpecificWorkflow: "Klik untuk melihat dampak pada alur kerja spesifik",
+                dataVizInteractionHoverSavingsBreakdown: "Hover untuk melihat rincian penghematan per kategori",
+                dataVizInteractionFilterPlatform: "Filter berdasarkan platform (Facebook, Instagram)",
+                dataVizInteractionHoverKeyConversion: "Hover untuk melihat titik data konversi kunci",
+                dataVizInteractionCompareOrganicTrends: "Bandingkan tren lalu lintas organik dengan waktu",
+                dataVizInteractionShowRelatedMetrics: "Tampilkan metrik terkait (tayangan, klik produk)",
+                dataVizInteractionFilterProductLocation: "Filter berdasarkan kategori produk atau lokasi",
+                dataVizInteractionShowRelatedRevenueProfit: "Tampilkan metrik terkait (pendapatan, keuntungan)",
+
+
+                // Skills Section
+                skillsTitle: "Keterampilan & Penerapan Proyek",
+                skillCategoryPerfMarketing: "Pemasaran Kinerja",
+                skillCategoryProjectMgmt: "Manajemen Proyek",
+                skillCategoryDataAnalysis: "Analisis Data",
+                skillCategoryContentVideo: "Pembuatan Konten & Video",
+                skillCategoryEcommerce: "Pemasaran E-commerce",
+                skillCategoryLeadership: "Kepemimpinan & Kolaborasi",
+                skillAppROASCTR: "Peningkatan ROAS 40.835%, Peningkatan CTR 23%",
+                skillAppSocialTraffic: "Peningkatan keterlibatan sosial 60%, Peningkatan lalu lintas situs web 40% dari platform sosial",
+                skillAppConversionIncrease: "Peningkatan konversi 30%",
+                skillAppCPAReductionCTRIncrease: "Pengurangan CPA 20%, Peningkatan CTR 18.39%",
+                skillAppProductivitySavings: "Peningkatan produktivitas 30%, Penghematan 300.000 juta rupiah/tahun",
+                skillAppDecisionSalesIncrease: "Peningkatan pengambilan keputusan 25%, Peningkatan penjualan di toko 12%",
+                skillAppDecisionEngagement: "Peningkatan pengambilan keputusan & keterlibatan pelanggan",
+                skillAppProjectsReach: "Memastikan 50+ proyek memenuhi tujuan, meningkatkan jangkauan 216%",
+                skillAppVFXSolutions: "Meningkatkan proyek dengan solusi VFX inovatif",
+                skillAppOrganicTraffic: "Mendorong lalu lintas organik 22%",
+                skillAppProductVisibility: "Peningkatan visibilitas produk 40%",
+                skillAppMarketingBusinessGoals: "Menyelaraskan inisiatif pemasaran dengan tujuan bisnis",
+                skillAppSMEGuidance: "Membimbing UKM mengatasi tantangan pemasaran digital",
+
+                // Design Philosophy Section (NEW)
+                designPhilosophyTitle: "Filosofi Desain & Pengalaman Pengguna",
+                designPhilosophyIntro: "Di balik setiap antarmuka yang menarik, terdapat filosofi desain yang berpusat pada pengguna. Saya percaya bahwa interaksi digital harus intuitif, efisien, dan menyenangkan.",
+                designPhilosophyPara1: "Saat Anda mengeklik menu atau tautan, animasi navigasi dapat mengubah tindakan sederhana menjadi pengalaman yang mulus. Mereka seperti GPS situs Anda, memandu pengguna dari satu tempat ke tempat lain. Ini bisa berupa menu yang terbuka dengan elegan atau transisi antar halaman yang semulus membalik buku. Interaksi ini membantu pengguna memahami di mana mereka berada di situs Anda dan bagaimana menuju ke tempat yang mereka inginkan.",
+                designPhilosophyPara2: "Animasi ini mengurangi kebingungan dan menciptakan alur yang terasa alami dan intuitif. Ini adalah bagian dari komitmen saya untuk menciptakan pengalaman digital yang tidak hanya fungsional tetapi juga berkesan.",
+                designPhilosophyExample: "Contoh: Animasi navigasi di situs web voting Awwwards oleh Tubik.",
+
+                // Contact Section
+                contactTitle: "Mari Terhubung!",
+                contactIntro: "Siap untuk meningkatkan strategi pemasaran digital atau menyederhanakan operasi Anda? Mari kita diskusikan bagaimana keahlian saya dapat memberikan dampak nyata bagi bisnis Anda.",
+                contactInfoTitle: "Informasi Kontak",
+                contactFormTitle: "Kirim Pesan",
+                formNamePlaceholder: "Nama Anda",
+                formEmailPlaceholder: "Email Anda",
+                formMessagePlaceholder: "Pesan Anda",
+                formSubmitBtn: "Kirim Pesan",
+
+                // Footer
+                footerCredit: "Dibuat dengan semangat dan data."
+            },
+            en: {
+                // Navigation
+                navHome: "Home",
+                navAbout: "About Me",
+                navPortfolio: "Portfolio",
+                navSkills: "Skills",
+                navDesignPhilosophy: "Design Philosophy", // NEW
+                navContact: "Contact",
+
+                // Home Section
+                welcomeLine1: "Welcome.",
+                welcomeLine2: "Where data meets strategy, and vision becomes results.",
+                welcomeLine3: "Explore how I transform digital challenges into measurable growth.",
+                homeHeroTitle: "Architecting Digital Growth & Operational Excellence",
+                homeHeroSubtitle: "Performance Digital Marketing Strategist | Project Management Innovator",
+                homeStat1ValueDisplay: "40850%", // Display value for animation - UPDATED
+                homeStat1Label: "ROAS Increase",
+                homeStat2ValueDisplay: "496%",
+                homeStat2Label: "Website Traffic Growth",
+                homeStat3ValueDisplay: "30%",
+                homeStat3Label: "Productivity Increase",
+                homeIntro: "I am a Results-Oriented Performance Digital Marketing Strategist & Project Management Innovator who excels at transforming complex data into high-impact strategies and efficient operational systems. This dual expertise in driving revenue through performance marketing and optimizing internal processes through project management represents a unique value proposition.",
+                homeCta: "View My Portfolio",
+                homeAchievementsTitle: "Key Project Achievements Summary",
+                homeAchievementROAS: "ROAS Increase",
+                homeAchievementTraffic: "Website Traffic Growth",
+                homeAchievementProductivity: "Productivity Increase",
+                homeAchievementCostSaving: "Cost Saving",
+                homeAchievementEngagement: "Instagram Engagement Increase",
+                homeAchievementConversionRate: "Conversion Rate Increase",
+
+                // About Section
+                aboutTitle: "About Me",
+                aboutNarrative1: "Mahasin Hadiyatulloh is a Results-Oriented Performance Digital Marketing Strategist & Project Management Innovator who excels at transforming complex data into high-impact strategies and efficient operational systems. This dual expertise in driving revenue through performance marketing and optimizing internal processes through project management represents a unique value proposition.",
+                aboutNarrative2: "My expertise extends beyond merely running campaigns; I am an architect of growth. I don't just manage projects; I build systems that drive efficiency and accountability. My creative background as a 'Content Creator & Videographer' and 'VFX Artist' adds a distinct dimension, allowing for a full-spectrum understanding of digital initiatives from strategy to execution and visual appeal. This holistic understanding positions me as a comprehensive solution provider.",
+                aboutNarrative3: "The diversity of roles I've undertaken showcases a broad and varied skill set. In the contemporary digital landscape, successful marketing and operational initiatives increasingly demand cross-functional understanding. This positions me not merely as a task executor but as a strategic architect capable of bridging gaps between various departments and disciplines, ultimately leading to more cohesive, efficient, and successful business outcomes.",
+                aboutSkillsTitle: "Skills & Expertise",
+                skillPerfMarketing: "Performance Marketing: Google Ads, Meta Ads, Keyword Research & Bid Management, Paid Advertising.",
+                skillDataDecision: "Data-Driven Decision Making: Google Analytics, Google Tag Manager, Google Data Studio, Data-Driven Optimization.",
+                skillCRO: "Conversion Rate Optimization (CRO): A/B Testing, Ad Creative Optimization.",
+                skillProjectMgmt: "Project Management: Notion System Development, KPI Frameworks & Dashboards.",
+                skillContentVideo: "Video Production & Editing, Virtual Effects Editing.",
+                aboutCertAwardsTitle: "Certifications & Awards",
+                cert1: "Google Ads Certification",
+                cert2: "Microsoft Advertising Certification",
+                cert3: "Google Data Analytics Certification",
+                award1: "Employee of The Year Award 2023",
+                award2: "1st Place Inter-School Band Competition (Vocalist)",
+                aboutLeadershipTitle: "Volunteer & Leadership",
+                aboutLeadershipDesc: "Mentor at Digital Entrepreneurship Academy, guiding SMEs through digital marketing challenges.",
+
+                // Portfolio Section
+                portfolioTitle: "My Portfolio",
+                project1Title: "Performance Marketing Campaign - PT Mooi Sentra Wisata",
+                project1Desc: "Increased ROAS, website traffic, and conversion rates through optimized Google Ads campaigns.",
+                project2Title: "Project Management System - Notion",
+                project2Desc: "Developed an integrated marketing team management system in Notion to enhance efficiency and collaboration.",
+                project3Title: "Content Creation & Videography - Heritage Lifestyle Hub",
+                project3Desc: "Boosted brand awareness and Instagram engagement through cinematic video content.",
+                project4Title: "E-commerce Marketing - PT Jodamo Exchange",
+                project4Desc: "Drove organic traffic and product visibility for an e-commerce platform.",
+                project5Title: "Marketing Leadership - Wheels Bintaro Partnership",
+                project5Desc: "Increased voucher redemption rates and revenue growth above target.",
+                project6Title: "Interactive Data Visualization",
+                project6Desc: "Demonstrated analytical capabilities through interactive dashboards and dynamic data visualizations.",
+                projectCta: "View Case Study",
+                dataVizOpportunitiesTitle: "Interactive Data Visualization Opportunities",
+                dataVizMetricROAS: "ROAS",
+                dataVizMetricTraffic: "Website Traffic",
+                dataVizMetricCTR: "CTR",
+                dataVizMetricCPA: "CPA",
+                dataVizMetricProductivity: "Productivity",
+                dataVizMetricCostSaving: "Cost Saving",
+                dataVizMetricSocialEngagement: "Social Engagement",
+                dataVizMetricConversionRate: "Conversion Rate",
+                dataVizMetricOrganicTraffic: "Organic Traffic",
+                dataVizMetricProductVisibility: "Product Visibility",
+                dataVizMetricInStoreSales: "In-Store Sales",
+                dataVizMetricVoucherRedemption: "Voucher Redemption Rate",
+                dataVizTypeLineArea: "Line/Area Chart",
+                dataVizTypeLine: "Line Chart",
+                dataVizTypeBarLine: "Bar/Line Chart",
+                dataVizTypeGaugeProgress: "Gauge/Progress Bar",
+                dataVizTypeBarDonut: "Bar/Donut Chart",
+                dataVizInteractionHoverMonthly: "Hover to see monthly breakdown, filter by campaign type",
+                dataVizInteractionToggleOrganicPaid: "Toggle between organic vs. paid traffic",
+                dataVizInteractionFilterAudienceTime: "Filter by audience segment or time period",
+                dataVizInteractionCompareBeforeAfter: "Compare CPA before and after optimization",
+                dataVizInteractionClickSpecificWorkflow: "Click to see impact on specific workflows",
+                dataVizInteractionHoverSavingsBreakdown: "Hover to see breakdown of savings by category",
+                dataVizInteractionFilterPlatform: "Filter by platform (Facebook, Instagram)",
+                dataVizInteractionHoverKeyConversion: "Hover to see key conversion data points",
+                dataVizInteractionCompareOrganicTrends: "Compare organic traffic trends over time",
+                dataVizInteractionShowRelatedMetrics: "Show related metrics (impressions, product clicks)",
+                dataVizInteractionFilterProductLocation: "Filter by product category or location",
+                dataVizInteractionShowRelatedRevenueProfit: "Show related metrics (revenue, profit)",
+
+                // Skills Section
+                skillsTitle: "Skills & Project Application",
+                skillCategoryPerfMarketing: "Performance Marketing",
+                skillCategoryProjectMgmt: "Project Management",
+                skillCategoryDataAnalysis: "Data Analysis",
+                skillCategoryContentVideo: "Content & Video Creation",
+                skillCategoryEcommerce: "E-commerce Marketing",
+                skillCategoryLeadership: "Leadership & Collaboration",
+                skillAppROASCTR: "10,835% ROAS Increase, 23% CTR Increase",
+                skillAppSocialTraffic: "60% social engagement increase, 40% website traffic increase from social platforms",
+                skillAppConversionIncrease: "30% conversion increase",
+                skillAppCPAReductionCTRIncrease: "20% CPA Reduction, 18.39% CTR Increase",
+                skillAppProductivitySavings: "30% productivity increase, 300 million IDR/year savings",
+                skillAppDecisionSalesIncrease: "25% decision-making improvement, 12% in-store sales increase",
+                skillAppDecisionEngagement: "Improved decision-making & customer engagement",
+                skillAppProjectsReach: "Ensured 50+ projects met objectives, 216% reach increase",
+                skillAppVFXSolutions: "Enhanced projects with innovative VFX solutions",
+                skillAppOrganicTraffic: "Drove 22% organic traffic",
+                skillAppProductVisibility: "40% product visibility increase",
+                skillAppMarketingBusinessGoals: "Aligned marketing initiatives with business goals",
+                skillAppSMEGuidance: "Guided SMEs through digital marketing challenges",
+
+                // Design Philosophy Section (NEW)
+                designPhilosophyTitle: "Design Philosophy & User Experience",
+                designPhilosophyIntro: "Behind every engaging interface lies a user-centric design philosophy. I believe digital interactions should be intuitive, efficient, and delightful.",
+                designPhilosophyPara1: "When you click on a menu or a link, navigation animations can transform a simple action into a smooth experience. They’re like your site’s GPS, guiding users from one place to another. It can be menus that unfold elegantly or transitions between pages that are as smooth as flipping through a book. These interactions help users understand where they are on your site and how to get where they want to go.",
+                designPhilosophyPara2: "These animations reduce confusion and create a flow that feels natural and intuitive. This is part of my commitment to crafting digital experiences that are not only functional but also memorable.",
+                designPhilosophyExample: "Example: Navigation animations for the Awwwards voting website by Tubik.",
+
+                // Contact Section
+                contactTitle: "Mari Terhubung!",
+                contactIntro: "Siap untuk meningkatkan strategi pemasaran digital atau menyederhanakan operasi Anda? Mari kita diskusikan bagaimana keahlian saya dapat memberikan dampak nyata bagi bisnis Anda.",
+                contactInfoTitle: "Informasi Kontak",
+                contactFormTitle: "Kirim Pesan",
+                formNamePlaceholder: "Nama Anda",
+                formEmailPlaceholder: "Email Anda",
+                formMessagePlaceholder: "Pesan Anda",
+                formSubmitBtn: "Kirim Pesan",
+
+                // Footer
+                footerCredit: "Dibuat dengan semangat dan data."
+            }
+        };
+
+        // Data for Achievements Table (full data, not directly used for visual cards)
+        const achievementsData = [
+            { id: "mooi-roas", projectRole: { id: "PT Mooi Sentra Wisata - Pemasaran Kinerja", en: "PT Mooi Sentra Wisata - Performance Marketing" }, mainAchievement: { id: "Peningkatan ROAS", en: "ROAS Increase" }, quantitativeResult: "10.835%", context: "2022" },
+            { id: "mooi-traffic", projectRole: { id: "PT Mooi Sentra Wisata - Pemasaran Kinerja", en: "PT Mooi Sentra Wisata - Performance Marketing" }, mainAchievement: { id: "Pertumbuhan Lalu Lintas Situs Web", en: "Website Traffic Growth" }, quantitativeResult: "496%", context: "" },
+            { id: "mooi-ctr", projectRole: { id: "PT Mooi Sentra Wisata - Pemasaran Kinerja", en: "PT Mooi Sentra Wisata - Performance Marketing" }, mainAchievement: { id: "Peningkatan CTR", en: "CTR Increase" }, quantitativeResult: "23%", context: { id: "Tiga bulan pertama", en: "First three months" } },
+            { id: "mooi-cpa", projectRole: { id: "PT Mooi Sentra Wisata - Pemasaran Kinerja", en: "PT Mooi Sentra Wisata - Performance Marketing" }, mainAchievement: { id: "Pengurangan CPA", en: "CPA Reduction" }, quantitativeResult: "20%", context: "" },
+            { id: "mooi-revenue", projectRole: { id: "PT Mooi Sentra Wisata - Pemasaran Kinerja", en: "PT Mooi Sentra Wisata - Performance Marketing" }, mainAchievement: { id: "Peningkatan Pendapatan", en: "Revenue Increase" }, quantitativeResult: "18%", context: "2022" },
+            { id: "jodamo-productivity", projectRole: { id: "PT Jodamo Exchange - Manajemen Proyek", en: "PT Jodamo Exchange - Project Management" }, mainAchievement: { id: "Peningkatan Produktivitas", en: "Productivity Increase" }, quantitativeResult: "30%", context: "" },
+            { id: "jodamo-cost-saving", projectRole: { id: "PT Jodamo Exchange - Manajemen Proyek", en: "PT Jodamo Exchange - Project Management" }, mainAchievement: { id: "Penghematan Biaya", en: "Cost Saving" }, quantitativeResult: { id: "300.000 juta rupiah", en: "300 million IDR" }, context: { id: "Tahunan", en: "Annually" } },
+            { id: "jodamo-organic", projectRole: { id: "PT Jodamo Exchange - Pemasaran E-commerce", en: "PT Jodamo Exchange - E-commerce Marketing" }, mainAchievement: { id: "Pertumbuhan Lalu Lintas Organik", en: "Organic Traffic Growth" }, quantitativeResult: "22%", context: "" },
+            { id: "jodamo-visibility", projectRole: { id: "PT Jodamo Exchange - Pemasaran E-commerce", en: "PT Jodamo Exchange - E-commerce Marketing" }, mainAchievement: { id: "Peningkatan Visibilitas Produk", en: "Product Visibility Increase" }, quantitativeResult: "40%", context: { id: "Tiga bulan", en: "Three months" } },
+            { id: "jodamo-clicks", projectRole: { id: "PT Jodamo Exchange - Pemasaran E-commerce", en: "PT Jodamo Exchange - E-commerce Marketing" }, mainAchievement: { id: "Peningkatan Klik Produk", en: "Product Clicks Increase" }, quantitativeResult: "15%", context: { id: "Tiga bulan", en: "Three months" } },
+            { id: "jodamo-decision", projectRole: { id: "PT Jodamo Exchange - Pemasaran E-commerce", en: "PT Jodamo Exchange - E-commerce Marketing" }, mainAchievement: { id: "Peningkatan Pengambilan Keputusan", en: "Decision Making Improvement" }, quantitativeResult: "25%", context: { id: "Empat bulan", en: "Four months" } },
+            { id: "heritage-engagement", projectRole: { id: "Heritage Lifestyle Hub - Pembuatan Konten", en: "Heritage Lifestyle Hub - Content Creation" }, mainAchievement: { id: "Social Media Engagment", en: "Social Media Engagment" }, quantitativeResult: "40%", context: "" },
+            { id: "mooi-awareness", projectRole: { id: "PT Mooi Sentra Wisata - Pemasaran Kinerja", en: "PT Mooi Sentra Wisata - Performance Marketing" }, mainAchievement: { id: "Peningkatan Kesadaran Merek", en: "Brand Awareness Increase" }, quantitativeResult: "25%", context: "" },
+            { id: "mooi-conversion-rate", projectRole: { id: "PT Mooi Sentra Wisata - Pemasaran Kinerja", en: "PT Mooi Sentra Wisata - Performance Marketing" }, mainAchievement: { id: "Peningkatan Tingkat Konversi", en: "Conversion Rate Increase" }, quantitativeResult: "30%", context: "" },
+            { id: "jodamo-reach", projectRole: { id: "PT Jodamo Exchange - Konten Kreator", en: "PT Jodamo Exchange - Content Creator" }, mainAchievement: { id: "Peningkatan Jangkauan Konten", en: "Content Reach Increase" }, quantitativeResult: "216%", context: "" },
+            { id: "jodamo-interaction", projectRole: { id: "PT Jodamo Exchange - Konten Kreator", en: "PT Jodamo Exchange - Content Creator" }, mainAchievement: { id: "Peningkatan Interaksi Konten", en: "Content Interaction Increase" }, quantitativeResult: "200%", context: "" },
+            { id: "jodamo-video-saving", projectRole: { id: "PT Jodamo Exchange - Konten Kreator", en: "PT Jodamo Exchange - Content Creator" }, mainAchievement: { id: "Penghematan Waktu Produksi Video", en: "Video Production Time Saving" }, quantitativeResult: "30%", context: "" },
+            { id: "jodamo-in-store-sales", projectRole: { id: "PT Jodamo Exchange - Analis Data/Bisnis", en: "PT Jodamo Exchange - Data/Business Analyst" }, mainAchievement: { id: "Peningkatan Penjualan di Toko", en: "In-Store Sales Increase" }, quantitativeResult: "12%", context: { id: "Empat bulan", en: "Four months" } },
+            { id: "wheels-redemption", projectRole: { id: "Wheels Bintaro - Pemimpin Pemasaran", en: "Wheels Bintaro - Marketing Lead" }, mainAchievement: { id: "Tingkat Penukaran Voucher", en: "Voucher Redemption Rate" }, quantitativeResult: "43%", context: "" },
+            { id: "wheels-revenue-growth", projectRole: { id: "Wheels Bintaro - Pemimpin Pemasaran", en: "Wheels Bintaro - Marketing Lead" }, mainAchievement: { id: "Pertumbuhan Pendapatan di Atas Target", en: "Revenue Growth Above Target" }, quantitativeResult: "34%", context: "" },
+            { id: "wheels-profit-above-target", projectRole: { id: "Wheels Bintaro - Pemimpin Pemasaran", en: "Wheels Bintaro - Marketing Lead" }, mainAchievement: { id: "Keuntungan di Atas Target", en: "Profit Above Target" }, quantitativeResult: "136%", context: "" },
+            { id: "wheels-outlet-revenue", projectRole: { id: "Wheels Bintaro - Pemimpin Pemasaran", en: "Wheels Bintaro - Marketing Lead" }, mainAchievement: { id: "Peningkatan Pendapatan Outlet", en: "Outlet Revenue Increase" }, quantitativeResult: "27%", context: "" },
+            { id: "wheels-aov", projectRole: { id: "Wheels Bintaro - Pemimpin Pemasaran", en: "Wheels Bintaro - Marketing Lead" }, mainAchievement: { id: "Peningkatan Nilai Pesanan Rata-rata", en: "Average Order Value Increase" }, quantitativeResult: "142%", context: "" },
+            { id: "heritage-best-deal-transactions", projectRole: { id: "Heritage Best Deal - Pemimpin Pemasaran", en: "Heritage Best Deal - Marketing Lead" }, mainAchievement: { id: "Transaksi Melebihi Target", en: "Transactions Exceeding Target" }, quantitativeResult: "27%", context: "" },
+            { id: "heritage-best-deal-aov", projectRole: { id: "Heritage Best Deal - Pemimpin Pemasaran", en: "Heritage Best Deal - Marketing Lead" }, mainAchievement: { id: "Ukuran Keranjang Rata-rata Tumbuh", en: "Average Cart Size Growth" }, quantitativeResult: "7%", context: "" }
+        ];
+
+        // Selected achievements for visual display on Home page
+        const homeVisualAchievementsData = [
+            { value: { id: "40850%", en: "40850%" }, labelKey: "homeAchievementROAS" }, // UPDATED
+            { value: "496%", labelKey: "homeAchievementTraffic" },
+            { value: "30%", labelKey: "homeAchievementProductivity" },
+            { value: { id: "300.000 juta rupiah", en: "300 million IDR" }, labelKey: "homeAchievementCostSaving" },
+            { value: "40%", labelKey: "homeAchievementEngagement" },
+            { value: "30%", labelKey: "homeAchievementConversionRate" }
+        ];
+
+
+        // Data for Data Visualization Opportunities Table
+        const dataVizOpportunitiesData = [
+            { id: "roas-viz", metricKey: "dataVizMetricROAS", result: { id: "Peningkatan 40850%", en: "40850% Increase" }, project: { id: "PT Mooi Sentra Wisata", en: "PT Mooi Sentra Wisata" }, vizTypeKey: "dataVizTypeLineArea", interactionKey: "dataVizInteractionHoverMonthly" }, // UPDATED
+            { id: "website-traffic-viz", metricKey: "dataVizMetricTraffic", result: { id: "Pertumbuhan 496%", en: "496% Growth" }, project: { id: "PT Mooi Sentra Wisata", en: "PT Mooi Sentra Wisata" }, vizTypeKey: "dataVizTypeLine", interactionKey: "dataVizInteractionToggleOrganicPaid" },
+            { id: "ctr-viz", metricKey: "dataVizMetricCTR", result: { id: "Peningkatan 23%", en: "23% Increase" }, project: { id: "PT Mooi Sentra Wisata", en: "PT Mooi Sentata Wisata" }, vizTypeKey: "dataVizTypeBarLine", interactionKey: "dataVizInteractionFilterAudienceTime" },
+            { id: "cpa-viz", metricKey: "dataVizMetricCPA", result: { id: "Pengurangan 20%", en: "20% Reduction" }, project: { id: "PT Mooi Sentra Wisata", en: "PT Mooi Sentra Wisata" }, vizTypeKey: "dataVizTypeBarLine", interactionKey: "dataVizInteractionCompareBeforeAfter" },
+            { id: "productivity-viz", metricKey: "dataVizMetricProductivity", result: { id: "Peningkatan 30%", en: "30% Increase" }, project: { id: "Sistem Operasi Pemasaran Terintegrasi di Notion", en: "Integrated Marketing Operations System in Notion" }, vizTypeKey: "dataVizTypeGaugeProgress", interactionKey: "dataVizInteractionClickSpecificWorkflow" },
+            { id: "cost-saving-viz", metricKey: "dataVizMetricCostSaving", result: { id: "300.000 juta rupiah/tahun", en: "300 million IDR/year" }, project: { id: "Sistem Operasi Pemasaran Terintegrasi di Notion", en: "Integrated Marketing Operations System in Notion" }, vizTypeKey: "dataVizTypeBarDonut", interactionKey: "dataVizInteractionHoverSavingsBreakdown" },
+            { id: "social-engagement-viz", metricKey: "dataVizMetricSocialEngagement", result: { id: "Peningkatan 60%", en: "60% Increase" }, project: { id: "PT Mooi Sentra Wisata", en: "PT Mooi Sentra Wisata" }, vizTypeKey: "dataVizTypeBarLine", interactionKey: "dataVizInteractionFilterPlatform" },
+            { id: "conversion-rate-viz", metricKey: "dataVizMetricConversionRate", result: { id: "Peningkatan 30%", en: "30% Increase" }, project: { id: "PT Mooi Sentra Wisata", en: "PT Mooi Sentra Wisata" }, vizTypeKey: "dataVizTypeLineArea", interactionKey: "dataVizInteractionHoverKeyConversion" },
+            { id: "organic-traffic-viz", metricKey: "dataVizMetricOrganicTraffic", result: { id: "Pertumbuhan 22%", en: "22% Growth" }, project: { id: "PT Jodamo Exchange", en: "PT Jodamo Exchange" }, vizTypeKey: "dataVizTypeLine", interactionKey: "dataVizInteractionCompareOrganicTrends" },
+            { id: "product-visibility-viz", metricKey: "dataVizMetricProductVisibility", result: { id: "Peningkatan 40%", en: "40% Increase" }, project: { id: "PT Jodamo Exchange", en: "PT Jodamo Exchange" }, vizTypeKey: "dataVizTypeGaugeProgress", interactionKey: "dataVizInteractionShowRelatedMetrics" },
+            { id: "in-store-sales-viz", metricKey: "dataVizMetricInStoreSales", result: { id: "Peningkatan 12%", en: "12% Increase" }, project: { id: "Analis Data/Bisnis", en: "Data/Business Analyst" }, vizTypeKey: "dataVizTypeBarLine", interactionKey: "dataVizInteractionFilterProductLocation" },
+            { id: "voucher-redemption-viz", metricKey: "dataVizMetricVoucherRedemption", result: "43%", project: { id: "Wheels Bintaro Partnership", en: "Wheels Bintaro Partnership" }, vizTypeKey: "dataVizTypeGaugeProgress", interactionKey: "dataVizInteractionShowRelatedRevenueProfit" }
+        ];
+
+        // Data for Skills Matrix Table
+        const skillsMatrixData = [
+            { id: "google-ads", categoryKey: "skillCategoryPerfMarketing", skill: "Google Ads", projects: { id: "PT Mooi Sentra Wisata", en: "PT Mooi Sentra Wisata" }, applicationKey: "skillAppROASCTR" },
+            { id: "meta-ads", categoryKey: "skillCategoryPerfMarketing", skill: "Meta Ads", projects: { id: "PT Mooi Sentra Wisata", en: "PT Mooi Sentra Wisata" }, applicationKey: "skillAppSocialTraffic" },
+            { id: "cro", categoryKey: "skillCategoryPerfMarketing", skill: { id: "Optimasi Tingkat Konversi (CRO)", en: "Conversion Rate Optimization (CRO)" }, projects: { id: "PT Mooi Sentra Wisata", en: "PT Mooi Sentra Wisata" }, applicationKey: "skillAppConversionIncrease" },
+            { id: "keyword-research", categoryKey: "skillCategoryPerfMarketing", skill: { id: "Riset Kata Kunci & Penargetan Audiens", en: "Keyword Research & Audience Targeting" }, projects: { id: "PT Mooi Sentra Wisata", en: "PT Mooi Sentra Wisata" }, applicationKey: "skillAppCPAReductionCTRIncrease" },
+            { id: "notion-dev", categoryKey: "skillCategoryProjectMgmt", skill: { id: "Pengembangan Sistem Notion", en: "Notion System Development" }, projects: { id: "Sistem Operasi Pemasaran Terintegrasi di Notion", en: "Integrated Marketing Operations System in Notion" }, applicationKey: "skillAppProductivitySavings" },
+            { id: "kpi-dashboards", categoryKey: "skillCategoryProjectMgmt", skill: { id: "Kerangka KPI & Dasbor", en: "KPI Frameworks & Dashboards" }, projects: { id: "PT Jodamo Exchange, Analis Data/Bisnis", en: "PT Jodamo Exchange, Data/Business Analyst" }, applicationKey: "skillAppDecisionSalesIncrease" },
+            { id: "customer-behavior-analysis", categoryKey: "skillCategoryDataAnalysis", skill: { id: "Analisis Perilaku Pelanggan", en: "Customer Behavior Analysis" }, projects: { id: "Analis Data/Bisnis", en: "Data/Business Analyst" }, applicationKey: "skillAppDecisionEngagement" },
+            { id: "video-editing", categoryKey: "skillCategoryContentVideo", skill: { id: "Pengeditan Video", en: "Video Editing" }, projects: { id: "Heritage Lifestyle Hub", en: "Heritage Lifestyle Hub" }, applicationKey: "skillAppProjectsReach" },
+            { id: "vfx", categoryKey: "skillCategoryContentVideo", skill: { id: "Efek Visual (VFX)", en: "Visual Effects (VFX)" }, projects: "BStudios", applicationKey: "skillAppVFXSolutions" },
+            { id: "seo-strategy", categoryKey: "skillCategoryEcommerce", skill: { id: "Strategi SEO", en: "SEO Strategy" }, projects: { id: "PT Jodamo Exchange", en: "PT Jodamo Exchange" }, applicationKey: "skillAppOrganicTraffic" },
+            { id: "google-merchant-center", categoryKey: "skillCategoryEcommerce", skill: { id: "Integrasi Google Merchant Center", en: "Google Merchant Center Integration" }, projects: { id: "PT Jodamo Exchange", en: "PT Jodamo Exchange" }, applicationKey: "skillAppProductVisibility" },
+            { id: "cross-functional-team", categoryKey: "skillCategoryLeadership", skill: { id: "Kepemimpinan Tim Lintas Fungsi", en: "Cross-Functional Team Leadership" }, projects: { id: "Pemimpin Pemasaran", en: "Marketing Lead" }, applicationKey: "skillAppMarketingBusinessGoals" },
+            { id: "mentoring", categoryKey: "skillCategoryLeadership", skill: { id: "Mentoring & Berbagi Pengetahuan", en: "Mentoring & Knowledge Sharing" }, projects: { id: "Digital Entrepreneurship Academy", en: "Digital Entrepreneurship Academy" }, applicationKey: "skillAppSMEGuidance" }
+        ];
+
+
+        let currentLang = 'id'; // Default language
+
+        // Function to animate individual achievement counters
+        function animateAchievementCounter(element, targetValue) {
+            const obj = { count: 0 };
+            const targetString = String(targetValue);
+
+            let numericTarget;
+            let suffix = '';
+            let hasDecimal = false;
+
+            // Determine the suffix based on the target string content
+            if (targetString.includes('%')) {
+                suffix = '%';
+            } else if (targetString.includes('juta rupiah')) {
+                suffix = ' juta rupiah';
+            } else if (targetString.includes('million IDR')) {
+                suffix = ' million IDR';
+            } else if (targetString.includes('+')) {
+                suffix = '+';
+            }
+
+            // Regex to find numbers, including those with commas/dots as decimal/thousands separators
+            const numericMatch = targetString.match(/(\d[\d.,]*)/);
+
+            if (numericMatch && numericMatch[1]) {
+                let numStr = numericMatch[1];
+                // Check if the original number string part has a decimal separator (comma for ID, dot for EN)
+                if (numStr.includes(',') || numStr.includes('.')) {
+                    hasDecimal = true;
+                }
+
+                if (currentLang === 'id') {
+                    // Indonesian format: '.' for thousands, ',' for decimal
+                    numStr = numStr.replace(/\./g, '').replace(/,/g, '.');
+                } else {
+                    // English format: ',' for thousands, '.' for decimal (default parseFloat handles this)
+                    numStr = numStr.replace(/,/g, ''); // Remove thousands separator for parseFloat
+                }
+                numericTarget = parseFloat(numStr);
+            } else {
+                numericTarget = 0; // Fallback if no number found
+            }
+
+            gsap.to(obj, {
+                count: numericTarget,
+                duration: 2,
+                ease: "power2.out",
+                onUpdate: function() {
+                    let val = obj.count;
+                    let displayedValue;
+
+                    if (suffix === '%') {
+                        // If the original value had a decimal, display it with 3 decimal places (e.g., 10.835%)
+                        if (hasDecimal) {
+                            displayedValue = val.toFixed(3).replace('.', ',');
+                        } else {
+                            // Otherwise, display as a whole number (e.g., 40850%)
+                            displayedValue = Math.round(val).toLocaleString(currentLang === 'id' ? 'id-ID' : 'en-US', {useGrouping: false}); // Use useGrouping: false to prevent thousands separators for whole numbers
+                        }
+                        element.textContent = displayedValue + suffix;
+                    } else if (suffix === ' juta rupiah') {
+                        displayedValue = Math.round(val).toLocaleString('id-ID'); // Round and format for IDR
+                        element.textContent = displayedValue + suffix;
+                    } else if (suffix === ' million IDR') {
+                        displayedValue = val.toFixed(1); // Keep one decimal for millions
+                        element.textContent = displayedValue + suffix;
+                    } else if (suffix === '+') {
+                        displayedValue = Math.round(val);
+                        element.textContent = displayedValue + suffix;
+                    } else {
+                        // General number formatting based on current language
+                        displayedValue = Math.round(val).toLocaleString(currentLang === 'id' ? 'id-ID' : 'en-US');
+                        element.textContent = displayedValue;
+                    }
+                }
+            });
+        }
+
+        // Function to update content based on language
+        function updateContent() {
+            // Update elements with data-lang-key attribute
+            document.querySelectorAll('[data-lang-key]').forEach(element => {
+                const key = element.getAttribute('data-lang-key');
+                if (langContent[currentLang][key]) {
+                    element.textContent = langContent[currentLang][key];
+                }
+            });
+
+            // Update placeholder texts for forms
+            document.getElementById('name').placeholder = langContent[currentLang].formNamePlaceholder;
+            document.getElementById('email').placeholder = langContent[currentLang].formEmailPlaceholder;
+            document.getElementById('message').placeholder = langContent[currentLang].formMessagePlaceholder;
+
+            // Removed the initial setting of hero stats to 0 as they are now handled by the dynamic visual-achievements-grid
+
+            // Populate Visual Achievements Grid (Home Section)
+            const visualAchievementsGrid = document.getElementById('visual-achievements-grid');
+            visualAchievementsGrid.innerHTML = ''; // Clear existing content
+
+            homeVisualAchievementsData.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'visual-achievement-card opacity-0 transform translate-y-10';
+
+                const numberSpan = document.createElement('span');
+                numberSpan.className = 'visual-achievement-number';
+                numberSpan.textContent = '0'; // Initial text for animation
+
+                const labelSpan = document.createElement('span');
+                labelSpan.className = 'visual-achievement-label';
+                labelSpan.textContent = langContent[currentLang][item.labelKey];
+
+                card.appendChild(numberSpan);
+                card.appendChild(labelSpan);
+                visualAchievementsGrid.appendChild(card);
+
+                ScrollTrigger.create({
+                    trigger: card,
+                    start: "top 85%",
+                    onEnter: () => {
+                        gsap.to(card, {
+                            opacity: 1,
+                            y: 0,
+                            duration: 0.8,
+                            ease: "power2.out"
+                        });
+                        // Pass the correct localized value to the animation
+                        animateAchievementCounter(numberSpan, typeof item.value === 'object' ? item.value[currentLang] : item.value);
+                    },
+                    onLeaveBack: () => {
+                        gsap.to(card, {
+                            opacity: 0,
+                            y: 10,
+                            duration: 0.3
+                        });
+                    }
+                });
+            });
+
+            // Populate Interactive Data Visualization Opportunities Grid (Portfolio Section)
+            const interactiveDataVizGrid = document.getElementById('interactive-data-viz-grid');
+            interactiveDataVizGrid.innerHTML = ''; // Clear existing content
+
+            dataVizOpportunitiesData.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'interactive-data-viz-card opacity-0 transform translate-y-10';
+
+                const metricDiv = document.createElement('div');
+                metricDiv.className = 'data-viz-metric';
+                metricDiv.textContent = langContent[currentLang][item.metricKey];
+
+                const resultSpan = document.createElement('span');
+                resultSpan.className = 'data-viz-result';
+                resultSpan.textContent = '0'; // Initial text for animation
+
+                const vizTypeDiv = document.createElement('div');
+                vizTypeDiv.className = 'data-viz-type';
+                let iconClass = '';
+                if (item.vizTypeKey.includes('Line')) iconClass = 'fas fa-chart-line';
+                else if (item.vizTypeKey.includes('Bar')) iconClass = 'fas fa-chart-bar';
+                else if (item.vizTypeKey.includes('Gauge')) iconClass = 'fas fa-tachometer-alt';
+                else if (item.vizTypeKey.includes('Donut')) iconClass = 'fas fa-chart-pie';
+                vizTypeDiv.innerHTML = `<i class="${iconClass}"></i> ${langContent[currentLang][item.vizTypeKey]}`;
+
+
+                const interactionDiv = document.createElement('div');
+                interactionDiv.className = 'data-viz-interaction';
+                interactionDiv.textContent = langContent[currentLang][item.interactionKey];
+
+                card.appendChild(metricDiv);
+                card.appendChild(resultSpan);
+                card.appendChild(vizTypeDiv);
+                card.appendChild(interactionDiv);
+                interactiveDataVizGrid.appendChild(card);
+
+                ScrollTrigger.create({
+                    trigger: card,
+                    start: "top 85%",
+                    onEnter: () => {
+                        gsap.to(card, {
+                            opacity: 1,
+                            y: 0,
+                            duration: 0.8,
+                            ease: "power2.out"
+                        });
+                        // Pass the correct localized value to the animation
+                        animateAchievementCounter(resultSpan, typeof item.result === 'object' ? item.result[currentLang] : item.result);
+                    },
+                    onLeaveBack: () => {
+                        gsap.to(card, {
+                            opacity: 0,
+                            y: 10,
+                            duration: 0.3
+                        });
+                    }
+                });
+            });
+
+            // Populate Interactive Skills Grid (Skills Section)
+            const interactiveSkillsGrid = document.getElementById('interactive-skills-grid');
+            interactiveSkillsGrid.innerHTML = ''; // Clear existing content
+
+            skillsMatrixData.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'interactive-skill-card opacity-0 transform translate-y-10';
+
+                const categoryDiv = document.createElement('div');
+                categoryDiv.className = 'skill-category';
+                categoryDiv.textContent = langContent[currentLang][item.categoryKey];
+
+                const titleDiv = document.createElement('div');
+                titleDiv.className = 'skill-title';
+                titleDiv.textContent = typeof item.skill === 'object' ? item.skill[currentLang] : item.skill;
+
+                const projectsDiv = document.createElement('div');
+                projectsDiv.className = 'skill-projects';
+                projectsDiv.innerHTML = `<i class="fas fa-project-diagram skill-icon"></i> ${typeof item.projects === 'object' ? item.projects[currentLang] : item.projects}`;
+
+                const applicationDiv = document.createElement('div');
+                applicationDiv.className = 'skill-application';
+                applicationDiv.innerHTML = `<i class="fas fa-lightbulb skill-icon"></i> ${langContent[currentLang][item.applicationKey]}`;
+
+                card.appendChild(categoryDiv);
+                card.appendChild(titleDiv);
+                card.appendChild(projectsDiv);
+                card.appendChild(applicationDiv);
+                interactiveSkillsGrid.appendChild(card);
+
+                ScrollTrigger.create({
+                    trigger: card,
+                    start: "top 85%",
+                    onEnter: () => {
+                        gsap.to(card, {
+                            opacity: 1,
+                            y: 0,
+                            duration: 0.8,
+                            ease: "power2.out"
+                        });
+                    },
+                    onLeaveBack: () => {
+                        gsap.to(card, {
+                            opacity: 0,
+                            y: 10,
+                            duration: 0.3
+                        });
+                    }
+                });
+            });
+
+            // Update HTML lang attribute
+            document.documentElement.lang = currentLang;
+        }
+
+        // Language toggle button event listener
+        document.getElementById('lang-toggle').addEventListener('click', () => {
+            currentLang = currentLang === 'id' ? 'en' : 'id';
+            updateContent();
+        });
+
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+        const closeMobileMenuButton = document.getElementById('close-mobile-menu');
+        const mobileNavLinks = mobileMenuOverlay.querySelectorAll('a');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenuOverlay.classList.remove('hidden');
+        });
+
+        closeMobileMenuButton.addEventListener('click', () => {
+            mobileMenuOverlay.classList.add('hidden');
+        });
+
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenuOverlay.classList.add('hidden');
+            });
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+                // Remove active class from all nav links
+                document.querySelectorAll('nav a').forEach(link => link.classList.remove('active-nav-link'));
+                // Add active class to the clicked nav link
+                this.classList.add('active-nav-link');
+            });
+        });
+
+        // Set initial active nav link based on current scroll position
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('nav a');
+
+        // Re-initialize observer to include new section
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    navLinks.forEach(link => {
+                        link.classList.remove('active-nav-link');
+                        if (link.getAttribute('href') === '#' + entry.target.id) {
+                            link.classList.add('active-nav-link');
+                        }
+                    });
+                }
+            });
+        }, { threshold: 0.5 }); // Adjust threshold as needed
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+
+
+        // GSAP Animations
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Hero section animation
+        const tl = gsap.timeline({ delay: 0.5 });
+
+        // Animate welcome message lines
+        tl.from(".welcome-line", {
+            opacity: 0,
+            scale: 0.9,
+            y: 20,
+            duration: 0.8,
+            ease: "power2.out",
+            stagger: 0.3
+        })
+        // Then animate the main hero content
+        .from(".hero-content", {
+            opacity: 0,
+            y: 50,
+            duration: 1,
+            ease: "power3.out",
+            stagger: 0.2,
+            onComplete: () => {
+                // The stat cards are now dynamically populated and animated via ScrollTrigger
+                // No need to call animateAchievementCounter here for the main hero stats
+            }
+        }, "-=0.5"); // Start 0.5 seconds before the previous animation ends for a smoother transition
+
+        // Add hover effect for welcome message container
+        const welcomeMessageContainer = document.getElementById('welcome-message-container');
+        if (welcomeMessageContainer) {
+            welcomeMessageContainer.addEventListener('mouseenter', () => {
+                gsap.to(welcomeMessageContainer, { scale: 1.01, duration: 0.3, ease: "power1.out" });
+            });
+
+            welcomeMessageContainer.addEventListener('mouseleave', () => {
+                gsap.to(welcomeMessageContainer, { scale: 1, duration: 0.3, ease: "power1.out" });
+            });
+        }
+
+
+        // Section titles fade-in on scroll
+        gsap.utils.toArray("section h2").forEach(title => {
+            gsap.from(title, {
+                opacity: 0,
+                y: 50,
+                duration: 1,
+                ease: "power3.out",
+                scrollTrigger: {
+                    trigger: title,
+                    start: "top 80%", // When the top of the title is 80% from the top of the viewport
+                    end: "bottom 20%",
+                    toggleActions: "play none none reverse"
+                }
+            });
+        });
+
+        // Card animations on scroll
+        gsap.utils.toArray(".card").forEach(card => {
+            gsap.from(card, {
+                opacity: 0,
+                y: 50,
+                duration: 0.8,
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: card,
+                    start: "top 90%",
+                    toggleActions: "play none none reverse"
+                }
+            });
+        });
+
+        // Initial content load
+        updateContent();
+    </script>
+</body>
+</html>
